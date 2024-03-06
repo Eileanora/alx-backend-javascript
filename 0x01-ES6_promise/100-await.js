@@ -6,6 +6,6 @@ export default async function handleProfileSignup(firstName, lastName, fileName)
     const user = await createUser({ firstName, lastName });
     return { photo, user };
   } catch (error) {
-    return { photo: null, user: null};
+    return { photo: null, user: null };
   }
 }
