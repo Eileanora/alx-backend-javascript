@@ -1,5 +1,21 @@
 export default class HolbertonCourse {
+  static validateType(name, length, students) {
+    if (typeof name !== 'string') {
+      throw new TypeError('Name must be a string');
+    }
+    if (typeof length !== 'number') {
+      throw new TypeError('Length must be a number');
+    }
+    if (!Array.isArray(students)) {
+      throw new TypeError('Students must be an array');
+    }
+    if (students.every((student) => typeof student !== 'string')) {
+      throw new TypeError('Students must be an array of strings');
+    }
+  }
+
   constructor(name, length, students) {
+    HolbertonCourse.validateType(name, length, students);
     /* eslint-disable */
     this._name = name;
     this._length = length;
@@ -18,26 +34,17 @@ export default class HolbertonCourse {
   }
 
   set name(newName) {
-    if(typeof newName !== 'string') {
-      throw new TypeError('Name must be a string');
-    }
+    HolbertonCourse.validateType(newName, this._length, this._students);
     this._name = newName;
   }
 
   set length(newLength) {
-    if(typeof newLength !== 'number') {
-      throw new TypeError('Length must be a number');
-    }
+    HolbertonCourse.validateType(this._name, newLength, this._students);
     this._length = newLength;
   }
 
   set students(newStudents) {
-    if(!Array.isArray(newStudents)) {
-      throw new TypeError('Students must be an array');
-    }
-    if(newStudents.every((student) => typeof student !== 'string')) {
-      throw new TypeError('Students must be an array of strings');
-    }
+    HolbertonCourse.validateType(this._name, this._length, newStudents);
     this._students = newStudents;
   }
 }
