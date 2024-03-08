@@ -25,6 +25,9 @@ export default class Pricing {
   }
 
   static converPrice(amount, convertionRate) {
+    if(typeof amount !== 'number' || typeof convertionRate !== 'number') {
+      throw new Error('amount and convertionRate should be numbers');
+    }
     return amount * convertionRate;
   }
 }
